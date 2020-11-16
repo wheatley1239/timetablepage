@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+    <head>
+        
+        <title>GCSE Revision Timetable</title>
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+  
+        <style type="text/css">
+        
+            body {
+
+                padding: 0px;
+                margin: 0px;
+
+                width: 100vw;
+                height: 100vh;
+
+                background: #212529;
+
+            }
+
+            .timetable-parent {
+
+                width: 1000px;
+                height: 700px;  
+                
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%,-50%);
+
+                /*border: 2px solid black;*/
+                background: #343A40;
+                border-radius: 5px;
+
+            }
+
+            .timetable-header {
+
+                width: 100%;
+                height: 20px;
+                
+                background: #495057; 
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+            }
+
+            .header-text {
+
+                color: white;
+                font-size: 12.5px;
+                margin: 0px;
+                margin-left: auto;
+                margin-right: 5px;
+
+            }
+
+            .circle {
+
+                width: 12.5px;
+                height: 12.5px;
+                border-radius: 50%;
+                margin-left: 5px;
+
+            }
+
+            #red {
+
+                background: red;
+                margin-left: 11px;
+
+            }
+
+            #orange {
+
+                background: orange;
+
+            }
+
+            #green {
+
+                background: green;
+
+            }
+
+            .timetable-container {
+
+                width: 100%;
+                height: calc(100% - 20px);
+
+            }
+
+            .tab-container {
+
+                width: 100%;
+                height: 30px;
+
+                display: flex;
+                flex-direction: row;
+
+            }
+
+            .tab {
+
+                width: 75px;
+                height: 55px;
+                
+                background: #495057;
+                
+                margin-left: 10px;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+            }
+
+            .tab-expanded {
+
+                animation-name: expand;
+                animation-duration: .25s;
+                animation-fill-mode: forwards;
+
+            }
+
+            .tab-shrunk {
+
+                animation-name: shrink;
+                animation-duration: .25s;
+                animation-fill-mode: forwards;
+
+            }
+
+            @keyframes expand {
+
+                from {height: 45px;}
+                to   {height: 65px;}
+
+            }
+
+            @keyframes shrink {
+            
+                from {height: 65px;}
+                to   {height: 45px;}
+            
+            }
+
+            .content-main {
+
+                width: 100%;
+                height: calc(100% - 30px);
+                
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+                color: white;
+
+            }
+
+            #tab-1 {
+
+                flex-direction: column-reverse;
+
+            }
+
+            #an-text {
+
+                align-self: flex-start;
+                margin-left: 34px;
+                margin-top: 15px;
+
+            }
+
+            .c-show {
+
+                display: flex;
+
+            }
+
+            .c-hidden {
+
+                display: none;
+
+            }
+
+            td, th {
+                
+                padding: 15px 10px;
+            
+            }
+
+            .i-col {
+
+                border-right: solid 1px #495057;
+
+            }
+
+            tr {
+
+                margin-top: 10px; 
+
+            }
+
+            /*.highlighted {
+
+
+
+            }*/
+
+        </style>
+
+    </head>
+  
+    <body>
+        
+        <div class="timetable-parent shadow-light">
+
+            <div class="timetable-header">
+
+                <div class="circle shadow-light" id="red"></div>
+                <div class="circle shadow-light" id="orange"></div>
+                <div class="circle shadow-light" id="green"></div>
+                <p class="header-text">Revision Timetable</p>
+            
+            </div>
+
+            <div class="timetable-container">
+
+                <div class="tab-container">
+
+                    <div class="tab tab-expanded" id="time-table-tab">
+
+                        Table
+
+                    </div>
+                    
+                    <div class="tab tab-shrunk" id="time-graph-tab">
+
+                        Graph
+
+                    </div>
+
+                </div>
+
+                <div class="content-main c-shown" id="tab-1">
+
+                    <table>
+
+                        <tr>
+
+                            <th class="i-col">Time</th>
+                            <th class="m">Monday</th>
+                            <th class="tu">Tuesday</th>
+                            <th class="w">Wednesday</th>
+                            <th class="th">Thursday</th>
+                            <th class="i-col f">Friday</th>
+                            <th class="m">Monday</th>
+                            <th class="tu">Tuesday</th>
+                            <th class="w">Wednesday</th>
+                            <th class="th">Thursday</th>
+                            <th class="f">Friday</th>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="i-col">3.30 - 4.00</td>
+                            <td class="m">English</td>
+                            <td class="tu">Maths</td>
+                            <td class="w">Chemistry</td>
+                            <td class="th">Biology</td>
+                            <td class="i-col f">Physics</td>
+                            <td class="m">History</td>
+                            <td class="tu">Music</td>
+                            <td class="w">Computing</td>
+                            <td class="th">DT</td>
+                            <td class="f">Any</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="i-col">4.00 - 4.30</td>
+                            <td class="m">Hwk. </td>
+                            <td class="tu">Hwk. </td>
+                            <td class="w">Hwk. </td>
+                            <td class="th">Hwk. </td>
+                            <td class="i-col f">Any</td>
+                            <td class="m">Hwk. </td>
+                            <td class="tu">Hwk. </td>
+                            <td class="w">Hwk. </td>
+                            <td class="th">Hwk. </td>
+                            <td class="f">Any</td>
+
+                        </tr>
+
+                        <p id="an-text">*Hwk. = Homework</p>
+
+                    </table>
+
+                </div>
+
+                <div class="content-main c-hidden" id="tab-2">
+
+                    graph
+
+                </div>
+
+            </div>
+
+        </div>
+        
+        <script type="text/javascript">
+
+            $(".tab").click(function toggleTab() {
+
+                $(".tab").toggleClass("tab-expanded tab-shrunk"); // toggled classes
+
+                $(".content-main").toggleClass("c-shown c-hidden");
+
+            });
+        
+        </script>
+  
+    </body>
+
+</html>
