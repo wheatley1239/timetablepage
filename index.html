@@ -216,11 +216,35 @@
 
             }
 
-            /*.highlighted {
+            .table-button {
 
+                width: 150px;
+                height: 50px;
+                background: none;
+                border: 2px solid #495057;
+                border-radius: 5px;
+                color: white;
+                font-weight: 400;
 
+            }
 
-            }*/
+            .table-button:hover {
+
+                font-weight: 450;
+
+            }
+
+            .table-button:focus {
+
+                outline: none;
+
+            }
+
+            .highlighted {
+
+                text-decoration: underline;
+
+            }
 
         </style>
 
@@ -258,7 +282,7 @@
                 </div>
 
                 <div class="content-main c-shown" id="tab-1">
-
+                    
                     <table>
 
                         <tr>
@@ -309,6 +333,8 @@
 
                         </tr>
 
+                        <button class="table-button"id="t-refresh">Refresh Table</button>
+                        
                         <p id="an-text">*Hwk. = Homework</p>
 
                     </table>
@@ -332,6 +358,49 @@
                 $(".tab").toggleClass("tab-expanded tab-shrunk"); // toggled classes
 
                 $(".content-main").toggleClass("c-shown c-hidden");
+
+            });
+
+            $("#t-refresh").click(function() {
+
+                console.log("clicked");
+
+                switch (new Date().getDay()) {
+
+                    case 1:
+                        $(".m").addClass("highlighted");
+                        $(".tu .w .th .f").removeData("highlighted");
+                        return;
+
+                    case 2:
+                        $(".tu").addClass("highlighted");
+                        $(".m .w .th .f").removeData("highlighted");
+                        return;
+
+                    case 3:
+                        $(".w").addClass("highlighted");
+                        $(".tu .m .th .f").removeData("highlighted");
+                        return;
+
+                    case 4:
+                        $(".th").addClass("highlighted");
+                        $(".tu .m .w .f").removeData("highlighted");
+                        return;
+
+                    case 5:
+                        $(".f").addClass("highlighted");
+                        $(".tu .m .th .w").removeData("highlighted");
+                        return;
+
+                    case 6:
+                        $(".tu .m .th .f .m").removeData("highlighted");
+                        return;
+
+                    case 0:
+                        $(".tu .m .th .f .m").removeData("highlighted");
+                        return;
+
+                }
 
             });
         
